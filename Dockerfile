@@ -23,10 +23,8 @@ RUN docker-php-ext-install -j$(nproc) mysqli pdo pdo_mysql \
 	docker-php-ext-configure ldap && \
     docker-php-ext-install ldap
 
-RUN apk add --no-cache --virtual .tz-build-deps $PHPIZE_DEPS \
-      && pecl install timezonedb-2026.4 \
-      && docker-php-ext-enable timezonedb \
-      && apk del .tz-build-deps
+RUN pecl install timezonedb-2026.4 \
+      && docker-php-ext-enable timezonedb
 	  
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
